@@ -1,19 +1,8 @@
 /**
  * Created by Leonhard Gahr on 04.04.2017.
  */
-init(parseInt("0x" + gup("sep", document.querySelector('script[src^="plugin/heading-overview.js"]').getAttribute("src"))));
-
-function gup( name, url ) {
-    if (!url) url = location.href;
-    name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
-    var regexS = "[\\?&]"+name+"=([^&#]*)";
-    var regex = new RegExp( regexS );
-    var results = regex.exec( url );
-    return results === null ? null : results[1];
-}
-
-function init(sep) {
-    console.log(sep);
+init();
+function init() {
     var seperator = " - ";
 
     var headings = document.getElementsByClassName("heading-overview");
@@ -31,20 +20,7 @@ function init(sep) {
     headElement.className = "head";
 
 
-    var textElements = [];
-
-    for (var key in headings) {
-        if (headings.hasOwnProperty(key) && headings[key].nodeType === 1) {
-            var element = document.createElement("h4");
-            element.innerText = headings[key].innerText.replace("\n", " ");
-            element.className = headings[key].innerText.replace(" ", "").toLowerCase() + " heading-preview";
-
-            var seperatorElement = document.createElement("h4");
-            seperatorElement.innerText = seperator;
-
-            textElements.push(element, seperatorElement)
-        }
-    }
+    var textElements = getTextElements(headings, seperator, false);
 
     textElements.pop();
 
@@ -109,4 +85,49 @@ function addRevealListener() {
     Reveal.addEventListener('overviewhidden', function () {
         document.getElementsByClassName("topics")[0].style.opacity = 1
     });
+
+    generateTableOfContents()
+}
+
+function getTextElements(headings, seperator, noTag) {
+    var textElements = [];
+
+    for (var key in headings) {
+        if (headings.hasOwnProperty(key) && headings[key].nodeType === 1) {
+            if (noTag) {
+                textElements.push(headings[key].innerHTML.replace("\n", " "))
+            } else {
+                var element = document.createElement("h4");
+                element.innerText = headings[key].innerHTML.replace("\n", " ");
+                element.className = headings[key].innerText.replace(" ", "").toLowerCase() + " heading-preview";
+
+                var seperatorElement = document.createElement("h4");
+                seperatorElement.innerText = seperator;
+
+                textElements.push(element, seperatorElement)
+            }
+        }
+    }
+
+    return textElements
+}
+
+function generateTableOfContents() {
+    var table_slide = document.getElementsByClassName("table-of-contents")[0];
+
+    if (table_slide === undefined) {
+        return
+    }
+
+    var textElements = getTextElements(document.getElementsByClassName("heading-overview"), "", true);
+
+    var list = document.createElement("ul");
+
+    for (var i in textElements) {
+        list.innerHTML += "<li>" + textElements[i] + "</li>"
+    }
+
+    table_slide.innerHTML = "<" + table_slide.getAttribute("data-heading-tag") + ">" + table_slide.getAttribute("data-heading") + "</" + table_slide.getAttribute("data-heading-tag") + ">";
+
+    table_slide.innerHTML += list.outerHTML;
 }
