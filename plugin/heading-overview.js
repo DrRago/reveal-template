@@ -98,7 +98,11 @@ function getTextElements(headings, seperator, noTag) {
                 textElements.push(headings[key].innerHTML.replace("\n", " "))
             } else {
                 var element = document.createElement("h4");
-                element.innerText = headings[key].innerHTML.replace("\n", " ");
+                if (headings[key].getAttribute("data-heading-overview") !== null) {
+                    element.innerText = headings[key].getAttribute("data-heading-overview");
+                } else {
+                    element.innerText = headings[key].innerHTML.replace("\n", " ");
+                }
                 element.className = headings[key].innerText.replace(" ", "").toLowerCase() + " heading-preview";
 
                 var seperatorElement = document.createElement("h4");
