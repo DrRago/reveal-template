@@ -192,14 +192,6 @@
             {src: 'plugin/heading-overview.js', async: true}
         ]
     });
-
-    Reveal.addEventListener('slidechanged', function () {
-        if (Reveal.getCurrentSlide().classList.contains("team")) {
-            Reveal.configure({width: "100%"});
-        } else {
-            Reveal.configure({width: "960"});
-        }
-    });
 </script>
 </body>
 </html>
