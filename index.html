@@ -7,13 +7,13 @@
     <title>P5-Presentation</title>
 
     <link rel="stylesheet" href="css/reveal.css">
-    <link rel="stylesheet" href="css/theme/league.css">
+    <link rel="stylesheet" href="css/theme/serif.css">
 
     <!-- Theme used for syntax highlighting of code -->
     <link rel="stylesheet" href="lib/css/zenburn.css">
 
     <!-- stylesheet for heading overview plugin -->
-    <link rel="stylesheet" href="css/heading.css">
+    <link rel="stylesheet" href="extCss/heading.css">
 
     <!-- Printing and PDF exports -->
     <script>
@@ -27,37 +27,20 @@
 <body>
 <div class="reveal">
     <div class="slides">
-        <section class="center">
-            <h1>Car - AI</h1>
-            <h3>Driving with Neuroevolution</h3>
-            <small>von Pascal de Vries, Leonhard Gahr, Nicolas Nierentz & Alexander Kossens</small>
+        <section class="no-heading-overview">
+            <h1>Title</h1>
+            <h3>Subtitle</h3>
+            <small>by [Authors]</small>
         </section>
-        <section>
-            <section class="center table-of-contents" data-heading-tag="h2" data-heading="Gliederung"></section>
-        </section>
+        <section class="no-heading-overview table-of-contents" data-heading-tag="h2" data-heading="Table of contents"></section>
         <section>
             <section class="center">
-                <h2 class="heading-overview">Einführung</h2>
-                <small>Über uns und das Projekt</small>
+                <h2 class="heading-overview">About us</h2>
+                <small>What do we do?</small>
             </section>
         </section>
     </div>
 </div>
-
-<style>
-    .img-rounded {
-        -webkit-border-radius: 50%;
-        -moz-border-radius: 50%;
-        border-radius: 50%;
-
-        width: 200px;
-    }
-
-    .profile ul {
-        vertical-align: middle;
-    }
-
-</style>
 
 <script src="lib/js/head.min.js"></script>
 <script src="js/reveal.js"></script>
@@ -204,7 +187,7 @@
             {src: 'plugin/math/math.js', async: true},
 
             // heading overview
-            {src: 'plugin/heading-overview.js', async: true}
+            {src: 'extPlugin/heading-overview.js', async: true}
         ]
     });
 
